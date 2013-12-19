@@ -1,67 +1,67 @@
-
 /**
  * A smarter way to control colors
  */
 function Culuh( _color ) {
-	var self = this;
-	self.orignal = _color;
-	self.reset();
+	if ( _color != undefined ) {
+		this.original = _color;
+		this.reset();
+	}
 }
 
 Culuh.prototype.reset = function( ) {
 	var self = this;
-	var color = self.original;
+	var color = this.original;
 	//------------------------------------------------------------
 	//  Check if it's RGB
 	//------------------------------------------------------------
 	color = color.toUpperCase();
 	if ( color.indexOf( 'RGB' ) > -1 ) {
 		var vals = color.match( /\d+\.?\d*/g );
-		self.r = parseInt( vals[0] );
-		self.g = parseInt( vals[1] );
-		self.b = parseInt( vals[2] );
+		this.r = parseInt( vals[0] );
+		this.g = parseInt( vals[1] );
+		this.b = parseInt( vals[2] );
 	}
 	//------------------------------------------------------------
 	//  No... then it's a hex
 	//------------------------------------------------------------
 	else {
 		var vals = color.match( /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i );
-		self.r = self.hexToInt( vals[1] );
-		self.g = self.hexToInt( vals[2] );
-		self.b = self.hexToInt( vals[3] );
+		this.r = this.hexToInt( vals[1] );
+		this.g = this.hexToInt( vals[2] );
+		this.b = this.hexToInt( vals[3] );
 	}
 }
 
 Culuh.prototype.hex = function() {
-	return self.rHex() + self.gHex() + self.bHex();
+	return this.rHex() + this.gHex() + this.bHex();
 };
 
 Culuh.prototype.rgb = function() {
-	return 'rgb('+self.r+','+self.g+','+self.b+')';
+	return 'rgb('+this.r+','+this.g+','+this.b+')';
 };
 
 Culuh.prototype.rHex = function() {
-	return self.intToHex( self.r );
+	return this.intToHex( this.r );
 };
 
 Culuh.prototype.gHex = function() {
-	return self.intToHex( self.g );
+	return this.intToHex( this.g );
 };
 
 Culuh.prototype.bHex = function() {
-	return self.intToHex( self.b );
+	return this.intToHex( this.b );
 };
 
 Culuh.prototype.rInt = function() {
-	return self.r;
+	return this.r;
 };
 
 Culuh.prototype.gInt = function() {
-	return self.g;
+	return this.g;
 };
 
 Culuh.prototype.bInt = function() {
-	return self.b;
+	return this.b;
 };
 
 Culuh.prototype.hexToInt = function( _hex ) {
