@@ -45,95 +45,130 @@ Culuh.prototype.reset = function( ) {
 
 /**
  * Builds HSV ( Hue, Saturation, and Value ) from RGB
+ * ported from http://lodev.org/cgtutor/color.html
  */
 Culuh.prototype.hsvUpdate = function() {
-	var min = Math.min( this.r, this.g, this.b );
-	var max = Math.max( this.r, this.g, this.b );
+	var h; 
+	var s;
+	var v;
 	
-	this.v = max;
-	var delta = max - min;
-	if ( max != 0 ) {
-		this.s = delta / max;
+	var r = this.r / 255;
+	var g = this.g / 255;
+	var b = this.b / 255;
+	
+	//------------------------------------------------------------
+	//  Find the value
+	//------------------------------------------------------------
+	var min = Math.min( r, g, b );
+	var max = Math.max( r, g, b );
+	var delta = max-min;
+	v = max;
+	
+	//------------------------------------------------------------
+	//  If black well... saturation is easy
+	//------------------------------------------------------------
+	if ( max == 0 ) {
+		s = 0;
 	}
 	else {
-		this.s = 0;
+		s = delta / max;
 	}
-	if ( this.r === max ) {
-		this.h = ( this.g - this.b ) / delta;
-	}
-	else if ( this.g === max ) {
-		this.h = 2 + ( this.b - this.r ) / delta;
+	if ( s == 0 ) {
+		h = 0;
 	}
 	else {
-		this.h = 4 + ( this.r - this.g ) / delta;
+		if ( r == max ) {
+			h = ( g-b ) / delta;
+		}
+		else if ( g == max ) {
+			h = 2 + ( b-r ) / delta;
+		}
+		else {
+			h = 4 + ( r-g ) / delta;
+		}
+		
+		if ( isNaN( h ) ) {
+			h = 0;
+		}
+		h /= 6;
+		if ( h < 0 ) {
+			h++;
+		}
+
 	}
-	this.h *= 60;
-	if ( this.h < 0 ) {
-		this.h += 360;
-	}
-	if ( isNaN( this.h ) ) {
-		this.h = 0;
-	}
+	this.h = parseInt( h * 255 );
+	this.s = parseInt( s * 255 );
+	this.v = parseInt( v * 255 );
+	console.log( this );
 }
 
 /**
  * Builds RGB from HSV
+ * ported from http://lodev.org/cgtutor/color.html
  */
 Culuh.prototype.rgbUpdate = function() {
-	//------------------------------------------------------------
-	//  No saturation means achromatic aka 'gray'
-	//------------------------------------------------------------
-	if ( this.s === 0 ) {
-		this.r = this.g = this.b = this.v;
-	}
-	//------------------------------------------------------------
-	//  Determine dominant hue
-	//------------------------------------------------------------
-	this.h /= 60;
-	var i = Math.floor( this.h );
+	var r;
+	var g;
+	var b;
+	
+	var h = this.h / 255;
+	var s = this.s / 255;
+	var v = this.v / 255;
 	
 	//------------------------------------------------------------
-	//  Build the possible RGB values
+	// No saturation means achromatic aka 'gray'
 	//------------------------------------------------------------
-	var f = this.h-i;
-	var p = parseInt( this.v * ( 1 - this.s ) );
-	var q = parseInt( this.v * ( 1 - this.s * f ) );
-	var t = parseInt( this.v * ( 1 - this.s * ( 1 - f ) ) );
+	if ( s == 0 ) {
+		r = g = b = v;
+	}
 	
 	//------------------------------------------------------------
-	//  Assign values based on dominant hue
+	// If there is saturation things get messy 
 	//------------------------------------------------------------
-	switch ( i ) {
-		case 0:
-			this.r = this.v;
-			this.g = t;
-			this.b = p;
-			break;
-		case 1:
-			this.r = q;
-			this.g = this.v;
-			this.b = p;
-		case 2:
-			this.r = p;
-			this.g = this.v;
-			this.b = t;
-			break;
-		case 3:
-			this.r = p;
-			this.g = q;
-			this.b = this.v;
-			break;
-		case 4:
-			this.r = t;
-			this.g = p;
-			this.b = this.v;
-			break;
-		default:
-			this.r = this.v;
-			this.g = p;
-			this.b = q;
-			break;
+	else {
+		h *= 6;
+		console.log( h );
+		var i = parseInt( Math.floor( h ));
+		var frac = h % 1;
+		var p = v * ( 1 - s );
+		var q = v * ( 1 - ( s * frac ));
+		var t = v * ( 1 - ( s * ( 1 - frac )));
+		switch( i ) {
+			case 0:
+				r = v;
+				g = t;
+				b = p;
+				break;
+			case 1:
+				r = q;
+				g = v;
+				b = p;
+				break;
+			case 2:
+				r = p;
+				g = v;
+				b = t;
+				break;
+			case 3:
+				r = p;
+				g = q;
+				b = v;
+				break;
+			case 4:
+				r = t;
+				g = p;
+				b = v;
+				break;
+			case 5:
+				r = v;
+				g = p;
+				b = q;
+				break;
+		}
 	}
+	this.r = parseInt( r * 255 );
+	this.g = parseInt( g * 255 );
+	this.b = parseInt( b * 255 );
 }
 
 /**
