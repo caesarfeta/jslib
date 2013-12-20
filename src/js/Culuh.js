@@ -191,15 +191,20 @@ Culuh.prototype.intToHex = function( _int ) {
  * Change the saturation of the color
  *
  * @param { float } _sat saturation multiplier
- * @param { bool: true } _set set the new saturation
+ * @param { boolean: false } _new return new Culuh
+ *		and don't change the current Culuh values
+ * @return { Culuh }
  */
-Culuh.prototype.sat = function( _sat, _set ) {
-	_set = ( _set == undefined ) ? true : _set;
+Culuh.prototype.sat = function( _sat, _out ) {
 	var sat = this.s;
 	sat *= _sat;
-	if ( _set == true ) {
+	if ( _out != true ) {
 		this.s = sat;
 		this.rgbUpdate();
 	}
-	return sat;
+	else {
+		var out = new Culuh( this.rgb() );
+		out.sat( _sat );
+		return out;
+	}
 }
