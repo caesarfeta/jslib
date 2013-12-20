@@ -3,8 +3,24 @@
 */
 module( "Culuh" );
 
-test( "rgbUpdate-hsvUpdate-1", function() {
+test( "rgbUpdate-0", function() {
 	var culuh = new Culuh( '#FFA934' );
+	var hex1 = culuh.hex();
+	culuh.rgbUpdate();
+	var hex2 = culuh.hex();
+	ok( hex1 == hex2, "Passed!" );
+});
+
+test( "rgbUpdate-1", function() {
+	var culuh = new Culuh( '#FFFFFF' );
+	var hex1 = culuh.hex();
+	culuh.rgbUpdate();
+	var hex2 = culuh.hex();
+	ok( hex1 == hex2, "Passed!" );
+});
+
+test( "rgbUpdate-2", function() {
+	var culuh = new Culuh( '#000000' );
 	var hex1 = culuh.hex();
 	culuh.rgbUpdate();
 	var hex2 = culuh.hex();

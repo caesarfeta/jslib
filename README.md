@@ -1,5 +1,4 @@
 # jslib
-
 jslib is a collection of general use Javascript classes.
 They aren't tied to any specific project and do very fundamental things.
 

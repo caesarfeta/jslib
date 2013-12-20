@@ -57,8 +57,6 @@ Culuh.prototype.hsvUpdate = function() {
 	}
 	else {
 		this.s = 0;
-		this.h = -1;
-		this.v = undefined;
 	}
 	if ( this.r === max ) {
 		this.h = ( this.g - this.b ) / delta;
@@ -189,6 +187,19 @@ Culuh.prototype.intToHex = function( _int ) {
 	return hex.toUpperCase();
 }
 
-Culuh.prototype.saturation = function( _sat ) {
-	
+/**
+ * Change the saturation of the color
+ *
+ * @param { float } _sat saturation multiplier
+ * @param { bool: true } _set set the new saturation
+ */
+Culuh.prototype.sat = function( _sat, _set ) {
+	_set = ( _set == undefined ) ? true : _set;
+	var sat = this.s;
+	sat *= _sat;
+	if ( _set == true ) {
+		this.s = sat;
+		this.rgbUpdate();
+	}
+	return sat;
 }
