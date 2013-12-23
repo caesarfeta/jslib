@@ -22,6 +22,7 @@ function Culuh( _color ) {
 Culuh.prototype.reset = function( ) {
 	var self = this;
 	var color = this.original;
+	
 	//------------------------------------------------------------
 	//  Check if it's RGB
 	//------------------------------------------------------------
@@ -32,6 +33,7 @@ Culuh.prototype.reset = function( ) {
 		this.g = parseInt( vals[1] );
 		this.b = parseInt( vals[2] );
 	}
+	
 	//------------------------------------------------------------
 	//  No... then it's a hex
 	//------------------------------------------------------------
@@ -96,10 +98,9 @@ Culuh.prototype.hsvUpdate = function() {
 		}
 
 	}
-	this.h = parseInt( h * 255 );
-	this.s = parseInt( s * 255 );
-	this.v = parseInt( v * 255 );
-	console.log( this );
+	this.h = h * 255;
+	this.s = s * 255;
+	this.v = v * 255;
 }
 
 /**
@@ -127,12 +128,12 @@ Culuh.prototype.rgbUpdate = function() {
 	//------------------------------------------------------------
 	else {
 		h *= 6;
-		console.log( h );
-		var i = parseInt( Math.floor( h ));
+		var i = Math.floor( h );
 		var frac = h % 1;
 		var p = v * ( 1 - s );
 		var q = v * ( 1 - ( s * frac ));
 		var t = v * ( 1 - ( s * ( 1 - frac )));
+
 		switch( i ) {
 			case 0:
 				r = v;
@@ -168,7 +169,7 @@ Culuh.prototype.rgbUpdate = function() {
 	}
 	this.r = parseInt( r * 255 );
 	this.g = parseInt( g * 255 );
-	this.b = parseInt( b * 255 );
+	this.b = parseInt( b * 255 );	
 }
 
 /**
@@ -182,38 +183,83 @@ Culuh.prototype.hex = function( _pre ) {
 	return _pre + this.rHex() + this.gHex() + this.bHex();
 }
 
+/**
+ * Returns RGB color value
+ *
+ * @return { string } rgb color value
+ */
 Culuh.prototype.rgb = function() {
 	return 'rgb('+this.r+','+this.g+','+this.b+')';
 }
 
+/**
+ * Returns red hex value
+ *
+ * @return { string } red hex value
+ */
 Culuh.prototype.rHex = function() {
 	return this.intToHex( this.r );
 }
 
+/**
+ * Returns green hex value
+ *
+ * @return { string } green hex value
+ */
 Culuh.prototype.gHex = function() {
 	return this.intToHex( this.g );
 }
 
+/**
+ * Returns blue hex value
+ *
+ * @return { string } blue hex value
+ */
 Culuh.prototype.bHex = function() {
 	return this.intToHex( this.b );
 }
 
+/**
+ * Returns red integer value 0-255
+ *
+ * @return { int } red int value
+ */
 Culuh.prototype.rInt = function() {
 	return this.r;
 }
 
+/**
+ * Returns green integer value 0-255
+ *
+ * @return { int } green int value
+ */
 Culuh.prototype.gInt = function() {
 	return this.g;
 }
 
+/**
+ * Returns blue integer value 0-255
+ *
+ * @return { int } blue int value
+ */
 Culuh.prototype.bInt = function() {
 	return this.b;
 }
 
+/**
+ * Converts hex to integer value
+ *
+ * @return { int } integer value
+ */
 Culuh.prototype.hexToInt = function( _hex ) {
 	return parseInt( _hex, 16 );
 }
 
+/**
+ * Converts integer to hex value
+ *
+ * @return { string } hexadecimal value
+ */
 Culuh.prototype.intToHex = function( _int ) {
 	var hex = _int.toString(16);
 	if ( hex.length < 2 ) {
