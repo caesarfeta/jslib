@@ -1,12 +1,13 @@
 /**
- * Build a full screen canvas
+ * Build a full screen canvas.
 */
 AutoCanvas = function( _id, _padding, _color ) {
 	//------------------------------------------------------------
 	// Set defaults
 	//------------------------------------------------------------
+	this.defaultColor = "#FFF";
 	this.padding = ( _padding != undefined ) ? _padding : 0;
-	this.color = ( _color != undefined ) ? _color : "#FFF";
+	this.color = this.color();
 	
 	//------------------------------------------------------------
 	//	Build the canvas
@@ -24,6 +25,10 @@ AutoCanvas = function( _id, _padding, _color ) {
 		self.resize();
 	});
 }
+
+/**
+ * Resize the canvas.
+ */
 AutoCanvas.prototype.resize = function() {
 	this.canvas.width = document.body.clientWidth - this.padding;
 	this.canvas.height = document.body.clientHeight - this.padding;
@@ -32,7 +37,13 @@ AutoCanvas.prototype.resize = function() {
 	this.canvas.style.left = this.padding/2;
 	document.body.style.backgroundColor = this.color;
 }
+
+/**
+ * Color the canvas
+ *
+ * @{ param } _color Color the canvas.
+ */
 AutoCanvas.prototype.color = function( _color ) {
-	this.color = _color
+	this.color = ( _color != undefined ) ? _color : this.defaultColor;
 	document.body.style.backgroundColor = this.color;
 }
