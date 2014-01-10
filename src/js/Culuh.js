@@ -289,3 +289,24 @@ Culuh.prototype.sat = function( _sat, _out ) {
 		return out;
 	}
 }
+
+/**
+ * Invert the color
+ *
+ * @param { boolean: false } _new return new Culuh
+ *		and don't change the current Culuh values
+ * @return { Culuh }
+ */
+Culuh.prototype.invert = function( _out ) {
+	if ( _out != true ) {
+		this.r = 255 - this.r;
+		this.g = 255 - this.g;
+		this.b = 255 - this.b;
+		this.hsvUpdate();
+	}
+	else {
+		var out = new Culuh( this.rgb() );
+		out.invert();
+		return out;
+	}
+}
