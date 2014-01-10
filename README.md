@@ -8,6 +8,9 @@ Builds an auto-resizing, fullscreen, HTML canvas.
 ## Culuh.js
 A class that allows you to manipulate colors and output them as either RGB or HEX values.
 
+## jQueryPlus.js
+Custom jQuery methods.
+
 ## StringExt.js
 Extends Javascript's native String prototype with some useful methods.
 
