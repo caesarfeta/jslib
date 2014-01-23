@@ -8,7 +8,7 @@ test( "rgbUpdate-0", function() {
 	var hex1 = culuh.hex();
 	culuh.rgbUpdate();
 	var hex2 = culuh.hex();
-	ok( hex1 == hex2, "Passed!" );
+	ok( hex1 == hex2 );
 });
 
 test( "rgbUpdate-1", function() {
@@ -16,7 +16,7 @@ test( "rgbUpdate-1", function() {
 	var hex1 = culuh.hex();
 	culuh.rgbUpdate();
 	var hex2 = culuh.hex();
-	ok( hex1 == hex2, "Passed!" );
+	ok( hex1 == hex2 );
 });
 
 test( "rgbUpdate-2", function() {
@@ -24,5 +24,5 @@ test( "rgbUpdate-2", function() {
 	var hex1 = culuh.hex();
 	culuh.rgbUpdate();
 	var hex2 = culuh.hex();
-	ok( hex1 == hex2, "Passed!" );
+	ok( hex1 == hex2 );
 });

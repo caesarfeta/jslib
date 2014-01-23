@@ -99,7 +99,6 @@ Culuh.prototype.hsvUpdate = function() {
 	this.h = parseInt( h * 255 );
 	this.s = parseInt( s * 255 );
 	this.v = parseInt( v * 255 );
-	console.log( this );
 }
 
 /**
@@ -127,7 +126,6 @@ Culuh.prototype.rgbUpdate = function() {
 	//------------------------------------------------------------
 	else {
 		h *= 6;
-		console.log( h );
 		var i = parseInt( Math.floor( h ));
 		var frac = h % 1;
 		var p = v * ( 1 - s );
