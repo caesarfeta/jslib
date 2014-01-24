@@ -16,7 +16,7 @@ test( "rgbUpdate-A934FF", function() {
 	var hex1 = culuh.hex();
 	culuh.rgbUpdate();
 	var hex2 = culuh.hex();
-	ok( hex1 == hex2, "Passed!" );
+	ok( hex1 == hex2 );
 });
 
 test( "rgbUpdate-DDDDDD", function() {
@@ -24,7 +24,7 @@ test( "rgbUpdate-DDDDDD", function() {
 	var hex1 = culuh.hex();
 	culuh.rgbUpdate();
 	var hex2 = culuh.hex();
-	ok( hex1 == hex2, "Passed!" );
+	ok( hex1 == hex2 );
 });
 
 test( "rgbUpdate-DDFFDD", function() {
@@ -32,7 +32,7 @@ test( "rgbUpdate-DDFFDD", function() {
 	var hex1 = culuh.hex();
 	culuh.rgbUpdate();
 	var hex2 = culuh.hex();
-	ok( hex1 == hex2, "Passed!" );
+	ok( hex1 == hex2 );
 });
 
 test( "rgbUpdate-FFFFFF", function() {
@@ -56,5 +56,5 @@ test( "rgbUpdate-FF0000", function() {
 	var hex1 = culuh.hex();
 	culuh.rgbUpdate();
 	var hex2 = culuh.hex();
-	ok( hex1 == hex2, "Passed!" );
+	ok( hex1 == hex2 );
 });

@@ -69,6 +69,44 @@ String.prototype.params = function() {
 }
 
 /*
+ * Check for the existence of an upper-case letter
+ *
+ * @return { boolean }
+ */
+String.prototype.hasUpper = function() {
+	return /[A-Z]/.test( this );
+}
+
+/*
+ * Create a word frequency report object
+ *
+ * @return { obj } Report object
+ */
+String.prototype.report = function() {
+	var words = this.toLowerCase().split(' ');
+	var stats = {};
+	for ( var i=0, ii=words.length; i<ii; i++ ) {
+		var word = words[i];
+		if ( ! ( word in stats ) ) {
+			stats[word] = 1;
+		}
+		else {
+			stats[word] += 1;
+		}
+	}
+	return stats;
+}
+
+/*
+ * Divide text into an array of lines by splitting on linebreaks
+ *
+ * @return { array } An array of lines
+ */
+String.prototype.lines = function() {
+	return this.split("\n");
+}
+
+/*
  * Divide text into an array of individual sentences
  * This is English-centric.  Forgive me.
  *
@@ -103,10 +141,11 @@ String.prototype.sentences = function() {
 			}
 		}
 		//------------------------------------------------------------
-		//  Also check for a capital letter.  Most sentences have
-		//  those too.
+		//  Also check for a capital letter on the first word.  
+		//  Most sentences have those too.
 		//------------------------------------------------------------
-		if ( !( /[A-Z]/.test( strCheck ) ) ) {
+		var capTest = strCheck.trim();
+		if ( ! capTest[0].hasUpper() ) {
 			merge = true;
 		}
 		//------------------------------------------------------------

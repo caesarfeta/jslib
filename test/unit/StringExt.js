@@ -51,3 +51,21 @@ test( "sentences-2", function() {
 	var sent = string.sentences();
 	ok( sent.length == 1 );
 });
+
+test( "sentences-2", function() {
+	var string = "Dr. Mark E. Wahlberg has a meeting with U.N.I.C.E.F at 9 A.M. and with S.H.I.E.L.D at 10 A.M.";
+	var sent = string.sentences();
+	ok( sent.length == 1 );
+});
+
+test( "report-0", function() {
+	var string = "Dog Dog Dog Dog Dog";
+	var report = string.report();
+	ok( report['dog'] == 5 );
+})
+
+test( "report-1", function() {
+	var string = "Dog Dog Cat Bunny Bunny";
+	var report = string.report();
+	ok( report['dog'] == 2 && report['cat'] == 1 && report['bunny'] == 2 );
+})
