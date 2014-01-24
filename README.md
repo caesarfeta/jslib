@@ -12,7 +12,10 @@ A class that allows you to manipulate colors and output them as either RGB or HE
 Custom jQuery methods.
 
 ## StringExt.js
-Extends Javascript's native String prototype with some useful methods.
+Extends Javascript's native String class with some useful methods.
+
+## ObjectExt.js
+Extends Javascript's native Object class with some useful methods.
 
 ## Styler.js
 Create CSS rules from within Javascript working at the class/selector level instead of the element level.
