@@ -38,3 +38,15 @@ jQuery.fn.cursorToEnd = function() {
 jQuery.fn.myHtml = function() {
 	return $( this ).clone().wrap( '<div>' ).parent().html();
 }
+
+/**
+ *  Get transition time in milliseconds
+ *
+ *  @return { Number } Time in milliseconds
+ */
+jQuery.fn.transLength = function() {
+	var trans = $( this ).css( 'transition' );
+	var res = trans.match( / [\d|\.]+s/g );
+	var sec = Number( res[0].replace( 's','' ) );
+	return sec*1000;
+}
