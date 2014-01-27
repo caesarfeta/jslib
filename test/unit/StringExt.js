@@ -69,3 +69,9 @@ test( "report-1", function() {
 	var report = string.report();
 	ok( report['dog'] == 2 && report['cat'] == 1 && report['bunny'] == 2 );
 })
+
+test( "params-0", function() {
+	var string = "http://www.breakfast.edu?flake=friend&dog=pluck";
+	var params = string.params();
+	ok( params['flake'] == "friend" && params['dog'] == "pluck" );
+})
