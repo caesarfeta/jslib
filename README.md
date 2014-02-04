@@ -15,7 +15,10 @@ Custom jQuery methods.
 Extends Javascript's native String class with some useful methods.
 
 ## ObjectExt.js
-Extends Javascript's native Object class with some useful methods.
+Mush and manipulate objects.
+
+## Sorted.js
+Array sorting methods.
 
 ## Styler.js
 Create CSS rules from within Javascript working at the class/selector level instead of the element level.
