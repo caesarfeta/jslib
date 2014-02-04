@@ -1,12 +1,16 @@
 /**
  * Get a quality timestamp
+ * @requires datejs ../third_party/datejs.date.js [ http://www.datejs.com/ ]
  */
 function TimeStamp() {}
 
 /**
  * Return a timestamp with a UTC offset
+ *
+ * @param { boolean } _milli include milliseconds
+ * @return { string } timestamp with UTC offset
  */
-TimeStamp.prototype.withUtc = function( ) {
+TimeStamp.prototype.withUtc = function( _milli ) {
 	var d = new Date();
 	var yyyy = d.getFullYear();
 	var mm = ('0' + (d.getMonth()+1)).slice(-2);
@@ -14,8 +18,23 @@ TimeStamp.prototype.withUtc = function( ) {
 	var hh = d.getHours();
 	var min = ('0' + d.getMinutes()).slice(-2);
 	var sec = ('0' + d.getSeconds()).slice(-2);
+	var mil = ('0' + d.getMilliseconds()).slice(-3);
 	var diff = d.getTimezoneOffset();
-	var time = yyyy+'-'+mm+'-'+dd+'T'+hh+":"+min+":"+sec+"UTC";
+	
+	//------------------------------------------------------------
+	//  Include milliseconds?
+	//------------------------------------------------------------
+	var time = '';
+	if ( _milli ) {
+		time = yyyy+'-'+mm+'-'+dd+'T'+hh+":"+min+":"+sec+":"+mil+"UTC";
+	}
+	else {
+		time = yyyy+'-'+mm+'-'+dd+'T'+hh+":"+min+":"+sec+"UTC";		
+	}
+	
+	//------------------------------------------------------------
+	//  Get the timezone offset
+	//------------------------------------------------------------
 	if ( diff > 0 ) {
 		time = time+"+"+diff;
 	}
@@ -25,3 +44,25 @@ TimeStamp.prototype.withUtc = function( ) {
 	return time;
 }
 
+/**
+ * Return unix time
+ *
+ * @param { string } _string timestamp with UTC offset
+ * @return { int } unix time
+ */
+TimeStamp.prototype.toUnix = function( _string ) {
+	//------------------------------------------------------------
+	// Kill the UTC offset
+	//------------------------------------------------------------
+	var cleanTime = _string.replace( /UTC.*/, '' );
+	var milli = 0;
+	//------------------------------------------------------------
+	// Grab the milliseconds if they exist
+	//------------------------------------------------------------
+	if ( cleanTime.match( /:\d{3}/ ) ) {
+		milli = cleanTime.slice( -4 );
+		cleanTime = cleanTime.replace( /:\d+$/, '' );
+		milli = parseInt( milli.replace(':','') );
+	}
+	return Date.parse( cleanTime ).getTime() + milli;
+}
