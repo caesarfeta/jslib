@@ -20,18 +20,45 @@ ObjectExt.prototype.mergeAdd = function( _obj1, _obj2 ) {
  * Count the characters of all values in an object
  *
  * @param { obj } _obj An Object
- * @return { array } character count, array of character counts by column
+ * @return { int } character count
  */
-ObjectExt.prototype.totalChars = function( _obj, _totalRoll ) {
+ObjectExt.prototype.totalChars = function( _obj, _totalRoll, _depth ) {
 	_totalRoll = ( _totalRoll == undefined ) ? 0 : _totalRoll;
-	for ( var key in _obj ) {
-		var type = typeof _obj[key];
+	_depth = ( _depth == undefined ) ? 0 : _depth;
+	for ( var i=0, ii=_obj.length; i<ii; i++ ) {
+		var type = typeof _obj[i];
 		if ( type == 'object' ) {
-			return this.totalChars( _obj[key], _totalRoll );
+			_depth++;
+			return this.totalChars( _obj[i], _totalRoll, _depth );
 		}
-		_totalRoll += _obj[key].toString().length;
+		_totalRoll += _obj[i].toString().length;
 	}
 	return _totalRoll;
+}
+
+/**
+ * Count the characters of all values in an object
+ *
+ * @param { obj } _obj An Object
+ * @return { array } character count, array of character counts by column
+ */
+ObjectExt.prototype.totalKeys = function( _obj ) {
+   var total = 0;
+   for ( var i in _obj ) {
+		if ( _obj.hasOwnProperty( i ) ) {
+			total++;
+		}
+	}
+	return total;
+}
+
+ObjectExt.prototype.wrap = function( _obj, _str1, _str2 ) {
+	_str2 = ( _str2 == undefined ) ? _str1: _str2;
+	var wrapped = [];
+	for ( var i=0, ii=_obj.length; i<ii; i++  ) {
+		wrapped[i] = _str1.toString() + _obj[i] + _str2.toString();
+	}
+	return wrapped;
 }
 
 /**
@@ -39,10 +66,11 @@ ObjectExt.prototype.totalChars = function( _obj, _totalRoll ) {
  * by A. Levy
  *
  * Coopted this function.  It clones an object.
+ *
  * @param { obj } _obj An Object
- * @param { obj } _obj Cloned Object
+ * @return { obj } _obj Cloned Object
 */
-Object.prototype.clone = function( _obj ) {
+ObjectExt.prototype.clone = function( _obj ) {
 	//------------------------------------------------------------
 	// Handle the 3 simple types, and null or undefined
 	//------------------------------------------------------------
