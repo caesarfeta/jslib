@@ -47,6 +47,15 @@ TimeStamp.prototype.withUtc = function( _milli ) {
 /**
  * Return unix time
  *
+ * @return { int } unix time
+ */
+TimeStamp.prototype.unix = function() {
+	return new Date().getTime();
+}
+
+/**
+ * Return unix time from UTC string
+ *
  * @param { string } _string timestamp with UTC offset
  * @return { int } unix time
  */
