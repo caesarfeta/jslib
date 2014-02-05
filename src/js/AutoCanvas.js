@@ -7,7 +7,7 @@ AutoCanvas = function( _id, _padding, _color ) {
 	//------------------------------------------------------------
 	this.defaultColor = "#FFF";
 	this.padding = ( _padding != undefined ) ? _padding : 0;
-	this.color = this.color();
+	this.color = this.color( _color );
 	
 	//------------------------------------------------------------
 	//	Build the canvas
