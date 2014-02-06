@@ -4,6 +4,10 @@
 function Sorted() {}
 
 Sorted.prototype.areaSort = function( _origArray, _x, _y1, _y2, _rollover, _depth ) {
+	console.log( _depth );
+	//------------------------------------------------------------
+	//  Set some default values
+	//------------------------------------------------------------
 	_rollover = ( _rollover == undefined ) ? [] : _rollover;
 	_depth = ( _depth == undefined ) ? 0 : _depth;
 	_x = ( _x == undefined ) ? 'x' : _x;
@@ -39,17 +43,13 @@ Sorted.prototype.areaSort = function( _origArray, _x, _y1, _y2, _rollover, _dept
 	_rollover[ _depth ].push( lowest );
 	var min = parseInt( lowest['param'][ _y1 ] );
 	var max = parseInt( lowest['param'][ _y2 ] );
-	
-	for ( var i=0; i<_origArray.length; i++ ) {
+	i = _origArray.length
+	while ( i-- ) {
 		var y1 = parseInt( _origArray[i]['param'][ _y1 ] );
 		var y2 = parseInt( _origArray[i]['param'][ _y2 ] );
 		var height = y2-y1;
-		var check = (y1+height)/2;
-		console.log( min, max, check );
+		var check = y1+(height/2);
 		if ( check >= min && check <= max ) {
-			//------------------------------------------------------------
-			//  It's in the row... what column? TODO
-			//------------------------------------------------------------
 			var splice = _origArray.splice( i,1 );
 			splice = splice[0];
 			_rollover[ _depth ].push( splice );
@@ -59,9 +59,21 @@ Sorted.prototype.areaSort = function( _origArray, _x, _y1, _y2, _rollover, _dept
 	//  Done sorting?
 	//------------------------------------------------------------
 	if ( _origArray.length == 0 ) {
-		console.log( _rollover );
+		
+		/*
+		// Just for debugging.
+		*/
+		for ( var i=0; i<_rollover.length; i++ ) {
+			console.log( '---group_'+i+'---' );
+			for ( var j=0; j<_rollover[i].length; j++ ) {
+				console.log( _rollover[i][j].id );
+			}
+		}
 		return _rollover;
 	}
+	//------------------------------------------------------------
+	//  Nope... well then do it again.
+	//------------------------------------------------------------
 	else {
 		_depth+=1;
 		this.areaSort( _origArray, _x, _y1, _y2, _rollover, _depth );
