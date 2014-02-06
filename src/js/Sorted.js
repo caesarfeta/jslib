@@ -1,5 +1,6 @@
 /**
  * Sort arrays
+ * @requires ObjectExt.js
  */
 function Sorted() {}
 
@@ -12,14 +13,10 @@ function Sorted() {}
  * @{ param } _y2 (required)
  * @{ param } _rollover
  * @{ param } _depth
- * @{ param } _nested
  * @{ return } A sorted two dimensional array of the rectangular objects
  */
-//------------------------------------------------------------
-//  TODO I need to figure out how to pass nested object
-//  selectors as a string.
-//------------------------------------------------------------
-Sorted.prototype.areaSort = function( _array, _x, _y1, _y2, _rollover, _depth, _nested ) {
+Sorted.prototype.areaSort = function( _array, _x, _y1, _y2, _rollover, _depth ) {
+	var objExt = new ObjectExt();
 	//------------------------------------------------------------
 	//  Set some default values
 	//------------------------------------------------------------
@@ -42,10 +39,10 @@ Sorted.prototype.areaSort = function( _array, _x, _y1, _y2, _rollover, _depth, _
 	//  Find the lowest Y
 	//------------------------------------------------------------
 	var lowestIndex = 0;
-	var lowestY = parseInt( _array[ lowestIndex ]['param'][ _y1 ] );
+	var lowestY = parseInt( objExt.byString( _array[ lowestIndex ], _y1 ) );
 	for ( var i=1, ii=_array.length; i<ii; i++ ) {
-		var check = parseInt( _array[i]['param'][ _y1 ] );
-		if (  check < lowestY ) {
+		var check = parseInt( objExt.byString( _array[i], _y1 ) );
+		if ( check < lowestY ) {
 			lowestY = check;
 			lowestIndex = i;
 		}
@@ -56,12 +53,12 @@ Sorted.prototype.areaSort = function( _array, _x, _y1, _y2, _rollover, _depth, _
 	var lowest = _array.splice( lowestIndex, 1 );
 	lowest = lowest[0];
 	_rollover[ _depth ].push( lowest );
-	var min = parseInt( lowest['param'][ _y1 ] );
-	var max = parseInt( lowest['param'][ _y2 ] );
+	var min = parseInt( objExt.byString( lowest, _y1 ) );
+	var max = parseInt( objExt.byString( lowest, _y2 ) );
 	i = _array.length
 	while ( i-- ) {
-		var y1 = parseInt( _array[i]['param'][ _y1 ] );
-		var y2 = parseInt( _array[i]['param'][ _y2 ] );
+		var y1 = parseInt( objExt.byString( _array[i], _y1 ) );
+		var y2 = parseInt( objExt.byString( _array[i], _y2 ) );
 		var height = y2-y1;
 		var check = y1+height/2;
 		if ( check >= min && check <= max ) {
@@ -87,19 +84,22 @@ Sorted.prototype.areaSort = function( _array, _x, _y1, _y2, _rollover, _depth, _
 	//------------------------------------------------------------
 	else {
 		_depth+=1;
-		return this.areaSort( _array, _x, _y1, _y2, _rollover, _depth, _nested );
+		return this.areaSort( _array, _x, _y1, _y2, _rollover, _depth );
 	}
 }
 
 /**
  * Sort an array of objects ascending numerically by a key's value
  *
- * @{ param } _array 
- * @{ param } _key
+ * @{ param } _array An array
+ * @{ param } _key A selection key string
  */
 Sorted.prototype.numSort = function( _array, _key ) {
+	var objExt = new ObjectExt();
 	function sortKeyNum( _a, _b ) {
-		return _a[_key] - _b[_key];
+		var a = parseInt( objExt.byString( _a, _key ) );
+		var b = parseInt( objExt.byString( _b, _key ) );
+		return  a - b;
 	}
 	return _array.sort( sortKeyNum );
 }

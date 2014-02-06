@@ -1,7 +1,8 @@
 ObjectExt = function() {}
 
 /**
- * Merge an object adding values
+ * Take number values from one object and numerically add values 
+ * from another object if the key names match.
  *
  * @param { obj } _obj1 An Object
  * @param { obj } _obj2 An Object
@@ -52,6 +53,14 @@ ObjectExt.prototype.totalKeys = function( _obj ) {
 	return total;
 }
 
+/**
+ * Wrap each value of an object with strings of your choice
+ *
+ * @param { obj } _obj An Object
+ * @param { obj } _str1 Prefix string
+ * @param { obj } _str2 Suffix string
+ * @return { obj } An Object of wrapped string values
+ */
 ObjectExt.prototype.wrap = function( _obj, _str1, _str2 ) {
 	_str2 = ( _str2 == undefined ) ? _str1: _str2;
 	var wrapped = [];
@@ -62,10 +71,10 @@ ObjectExt.prototype.wrap = function( _obj, _str1, _str2 ) {
 }
 
 /**
- * http://stackoverflow.com/questions/728360/most-elegant-way-to-clone-a-javascript-object
- * by A. Levy
+ * src: http://stackoverflow.com/questions/728360/most-elegant-way-to-clone-a-javascript-object
+ *	by A. Levy
  *
- * Coopted this function.  It clones an object.
+ * Clone an object.
  *
  * @param { obj } _obj An Object
  * @return { obj } _obj Cloned Object
@@ -104,4 +113,30 @@ ObjectExt.prototype.clone = function( _obj ) {
 		return copy;
 	}
 	throw new Error( "Unable to copy obj! Its type isn't supported." );
+}
+
+/**
+ * src: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key
+ *	by Alnitak
+ *
+ * Use a string as a nested object selector
+ *
+ * @param { obj } _obj An Object
+ * @param { obj } _str Nested selector string
+ * @return { ??? } The value stored in _obj referenced by _str
+ */
+ObjectExt.prototype.byString = function( _obj, _str ) {
+	_str = _str.replace(/\[(\w+)\]/g, '.$1' );
+	_str = _str.replace(/^\./, '');
+	var a = _str.split('.');
+	while ( a.length ) {
+		var n = a.shift();
+		if ( n in _obj ) {
+			_obj = _obj[n];
+		}
+		else {
+			return;
+		}
+	}
+	return _obj;
 }
