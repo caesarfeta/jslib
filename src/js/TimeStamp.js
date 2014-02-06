@@ -54,7 +54,7 @@ TimeStamp.prototype.unix = function() {
 }
 
 /**
- * Return unix time from UTC string
+ * Return millisecond unix time from UTC string
  *
  * @param { string } _string timestamp with UTC offset
  * @return { int } unix time

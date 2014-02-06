@@ -90,6 +90,7 @@ Sorted.prototype.areaSort = function( _array, _x, _y1, _y2, _rollover, _depth ) 
 
 /**
  * Sort an array of objects ascending numerically by a key's value
+ * Keys representing nested arrays can be used.
  *
  * @{ param } _array An array
  * @{ param } _key A selection key string
@@ -97,8 +98,8 @@ Sorted.prototype.areaSort = function( _array, _x, _y1, _y2, _rollover, _depth ) 
 Sorted.prototype.numSort = function( _array, _key ) {
 	var objExt = new ObjectExt();
 	function sortKeyNum( _a, _b ) {
-		var a = parseInt( objExt.byString( _a, _key ) );
-		var b = parseInt( objExt.byString( _b, _key ) );
+		var a = Number( objExt.byString( _a, _key ) );
+		var b = Number( objExt.byString( _b, _key ) );
 		return  a - b;
 	}
 	return _array.sort( sortKeyNum );

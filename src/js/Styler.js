@@ -10,7 +10,8 @@ function Styler() {
 }
 
 /**
- * Add a CSS declaration
+ * Add CSS declarations
+ * @param { obj } _rules An object of selector:style pairs.
  */
 Styler.prototype.add = function( _rules ) {
 	for ( var selector in _rules ) {
