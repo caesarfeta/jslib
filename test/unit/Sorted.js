@@ -9,7 +9,6 @@ test( "numSort -- int flat", function() {
 	var check = true;
 	for ( var i=1, ii=test.length; i<ii; i++ ) {
 		if ( test[i] < test[i-1] ) {
-			console.log( test[i], test[i-1] );
 			check = false;
 			break;
 		}
@@ -24,7 +23,6 @@ test( "numSort -- real flat", function() {
 	var check = true;
 	for ( var i=1, ii=test.length; i<ii; i++ ) {
 		if ( test[i] < test[i-1] ) {
-			console.log( test[i], test[i-1] );
 			check = false;
 			break;
 		}

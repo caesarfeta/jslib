@@ -129,7 +129,7 @@ ObjectExt.prototype.byString = function( _obj, _str ) {
 	if ( _str == undefined ) {
 		return _obj;
 	}
-	_str = _str.replace(/\[(\w+)\]/g, '.$1' );
+	_str = _str.replace(/\[['|"]*(\w+)['|"]*\]/g, '.$1' );
 	_str = _str.replace(/^\./, '');
 	var a = _str.split('.');
 	while ( a.length ) {
