@@ -6,6 +6,15 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Repeat a string n times
+ *
+ * @param {string} _n How many times you want to repeat a string
+ */
+String.prototype.repeat = function( _n ) {
+	return new Array( _n + 1 ).join( this );
+}
+
+/**
  * Count the occurences of a string in a larger string
  *
  * @parm {string} _sub : The search string
