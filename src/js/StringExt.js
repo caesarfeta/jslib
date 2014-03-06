@@ -6,6 +6,13 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Capitalize the first letter of a string
+ */
+String.prototype.capitalize = function() {
+	return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+/**
  * Repeat a string n times
  *
  * @param {string} _n How many times you want to repeat a string
