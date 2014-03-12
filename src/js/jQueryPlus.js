@@ -3,7 +3,7 @@
  */
 jQuery.fn.cursorToEnd = function() {
 	return this.each( function() {
-		$( this ).focus();
+		jQuery( this ).focus();
 		
 		//------------------------------------------------------------
 		//   If this function exists...
@@ -14,7 +14,7 @@ jQuery.fn.cursorToEnd = function() {
 			// Double the length because Opera is inconsistent 
 			// about whether a carriage return is one character or two.
 			//------------------------------------------------------------
-			var len = $( this ).val().length * 2;
+			var len = jQuery( this ).val().length * 2;
 			this.setSelectionRange( len, len );
 		} 
 		else {
@@ -22,7 +22,7 @@ jQuery.fn.cursorToEnd = function() {
 			// ... otherwise replace the contents with itself
 			// ( Doesn't work in Google Chrome )
 			//------------------------------------------------------------
-			$( this ).val( $( this ).val() );
+			jQuery( this ).val( jQuery( this ).val() );
 		}
 		//------------------------------------------------------------
 		// Scroll to the bottom, in case we're in a tall textarea
@@ -36,7 +36,7 @@ jQuery.fn.cursorToEnd = function() {
  *  Get an element's html
  */
 jQuery.fn.myHtml = function() {
-	return $( this ).clone().wrap( '<div>' ).parent().html();
+	return jQuery( this ).clone().wrap( '<div>' ).parent().html();
 }
 
 /**
@@ -45,7 +45,7 @@ jQuery.fn.myHtml = function() {
  *  @return { Number } Time in milliseconds
  */
 jQuery.fn.transLength = function() {
-	var trans = $( this ).css( 'transition' );
+	var trans = jQuery( this ).css( 'transition' );
 	var res = trans.match( / [\d|\.]+s/g );
 	var sec = Number( res[0].replace( 's','' ) );
 	return sec*1000;
