@@ -6,6 +6,13 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Alpha-numeric and spaces only
+ */
+String.prototype.alphaSpaceOnly = function() {
+	return this.replace(/[^\w\s]/gi, '');
+}
+
+/**
  * Capitalize the first letter of a string
  */
 String.prototype.capitalize = function() {
