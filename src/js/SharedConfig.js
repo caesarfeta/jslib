@@ -1,4 +1,4 @@
-function SharedConfig() {
+var SharedConfig = function() {
 	//------------------------------------------------------------
 	//  This class is a singleton.  Ensure only one instance exists.
 	//------------------------------------------------------------
@@ -20,7 +20,7 @@ function SharedConfig() {
 	 */
 	this.add = function( _key, _val ) {
 		this.config[ _key ] = _val;
-	};
+	}
 	
 	/**
 	 * Retrieve a config value.
@@ -30,5 +30,18 @@ function SharedConfig() {
 	 */
 	this.get = function( _key ) {
 		return this.config[ _key ];
+	}
+	
+	/**
+	 * Check for existence
+	 *
+	 * @param { string } _key Object key
+	 * @return { bool }
+	 */
+	this.check = function( _key ) {
+		if ( this.config[ _key ] == undefined ) {
+			return false;
+		}
+		return true;
 	}
 }
