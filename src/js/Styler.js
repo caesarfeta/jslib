@@ -1,6 +1,6 @@
 /**
  * Add/Change CSS with Javascript,
- * working at the class/selector level instead of the element level.
+ * working at the class/selector level instead of the tag level.
  */
 function Styler() {
 	this.head = document.getElementsByTagName('head')[0];
