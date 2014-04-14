@@ -76,37 +76,57 @@ String.prototype.occurs = function( _search, _overlap ) {
  * Find the positions of occurences of a substring
  *
  * @parm {string} _sub : The search string
- * @param {boolean} _overlap : Optional. Default: false
- * @return {Array} : An array of integers
+ * @param {boolean} _overlap : Optional. Default--false.
+ * @param {boolean} _ignoreXML : Optional. Check to see if string is inside XML/HTML element.
+ * @param {boolean} _onlyWords : Optional. Make sure string is a discrete word.
+ * @return {Array} : An array of integers.
  */
-String.prototype.positions = function( _search, _overlap ) {
+String.prototype.positions = function( _search, _overlap, _ignoreXML, _onlyWords ) {
 	var string = this;
-	//------------------------------------------------------------
-	//  If _search is null just return a char count
-	//------------------------------------------------------------
-	if ( _search == undefined ) {
-		return string.length;
-	}
 	//------------------------------------------------------------
 	//  Make sure _search is a string
 	//------------------------------------------------------------
 	_search+="";
 	//------------------------------------------------------------
-	//  If no search term is past just return a character count
-	//------------------------------------------------------------
-	if ( _search.length <= 0 ) {
-		return string.length;
-	}
-	//------------------------------------------------------------
 	//  Otherwise start counting.
 	//------------------------------------------------------------
 	var pos=0;
+	//------------------------------------------------------------
+	//  String overlapping allowed?
+	//------------------------------------------------------------
 	var step = ( _overlap ) ? 1 : _search.length;
 	var p = [];
 	while ( true ) {
+		var ok = true;
 		pos = string.indexOf( _search, pos );
 		if ( pos >= 0 ) {
-			p.push( pos );
+			//------------------------------------------------------------
+			//  Ignore if search string was found within an XML/HTML tag
+			//------------------------------------------------------------
+			if ( _ignoreXML == true ) {
+				for ( var i=pos; i<string.length; i++ ) {
+					if ( string[i] == '<' ) {
+						break;
+					}
+					if ( string[i] == '>' ) {
+						ok = false;
+					}
+				}
+			}
+			//------------------------------------------------------------
+			//  Check to see if search string is an isolated word
+			//------------------------------------------------------------
+			if ( _onlyWords == true ) {
+				if ( string[pos-1] != ' ' && string[pos+_search.length] != ' ' ) {
+					ok = false;
+				}
+			}
+			//------------------------------------------------------------
+			//  If everything is good
+			//------------------------------------------------------------
+			if ( ok == true ) {
+				p.push( pos );
+			}
 			pos += step;
 		}
 		else {
