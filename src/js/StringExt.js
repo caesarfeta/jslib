@@ -117,6 +117,15 @@ String.prototype.positions = function( _search, _overlap ) {
 }
 
 /*
+ * Insert a substring at a particular index
+ *
+ * @return { string } The modified string
+ */
+String.prototype.insertAt = function( _index, _string ) {
+	return this.substr( 0, _index) + _string + this.substr( _index );
+}
+
+/*
  * Turn a string with HTTP GET style parameters to an object
  *
  * @return { obj } A collection of keys and values
