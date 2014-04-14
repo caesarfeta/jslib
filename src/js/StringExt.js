@@ -72,6 +72,50 @@ String.prototype.occurs = function( _search, _overlap ) {
 	return n;
 }
 
+/**
+ * Find the positions of occurences of a substring
+ *
+ * @parm {string} _sub : The search string
+ * @param {boolean} _overlap : Optional. Default: false
+ * @return {Array} : An array of integers
+ */
+String.prototype.positions = function( _search, _overlap ) {
+	var string = this;
+	//------------------------------------------------------------
+	//  If _search is null just return a char count
+	//------------------------------------------------------------
+	if ( _search == undefined ) {
+		return string.length;
+	}
+	//------------------------------------------------------------
+	//  Make sure _search is a string
+	//------------------------------------------------------------
+	_search+="";
+	//------------------------------------------------------------
+	//  If no search term is past just return a character count
+	//------------------------------------------------------------
+	if ( _search.length <= 0 ) {
+		return string.length;
+	}
+	//------------------------------------------------------------
+	//  Otherwise start counting.
+	//------------------------------------------------------------
+	var pos=0;
+	var step = ( _overlap ) ? 1 : _search.length;
+	var p = [];
+	while ( true ) {
+		pos = string.indexOf( _search, pos );
+		if ( pos >= 0 ) {
+			p.push( pos );
+			pos += step;
+		}
+		else {
+			break;
+		}
+	}
+	return p;
+}
+
 /*
  * Turn a string with HTTP GET style parameters to an object
  *
