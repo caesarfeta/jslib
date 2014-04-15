@@ -20,6 +20,9 @@ Extends Javascript's native String class with some useful methods.
 ## ObjectExt.js
 Mush and manipulate objects.
 
+## Palette.js
+Predefined palettes an object away.
+
 ## SharedConfig.js
 Need a shared Javascript object with global scope to hold configuration options?
 
