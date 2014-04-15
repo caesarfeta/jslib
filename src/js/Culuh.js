@@ -247,6 +247,15 @@ Culuh.prototype.bInt = function() {
 }
 
 /**
+ * Returns blue integer value 0-255
+ *
+ * @return { int } RGB color values added together
+ */
+Culuh.prototype.value = function() {
+	return this.r+this.g+this.b
+}
+
+/**
  * Converts hex to integer value
  *
  * @return { int } integer value

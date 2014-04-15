@@ -2,6 +2,8 @@
  * Palettes are collections of colors.
  * Dependencies:
  * 		Culuh.js
+ * 		Sorted.js
+ * 		ObjectExt.js
  *
  * @param { string } _name The name of the palette.
  */
@@ -49,6 +51,74 @@ Palette.prototype.load = function( _name ) {
 				'#FD8471', // peach skin
 				'#88D499'  // blue grass
 			]);
+		case 'nes':
+			this.add([
+				'#7C7C7C',
+				'#0000FC',
+				'#0000BC',
+				'#4428BC',
+				'#940084',
+				'#A80020',
+				'#A81000',
+				'#881400',
+				'#503000',
+				'#007800',
+				'#006800',
+				'#005800',
+				'#004058',
+				'#000000',
+				'#000000',
+				'#000000',
+				'#BCBCBC',
+				'#0078F8',
+				'#0058F8',
+				'#6844FC',
+				'#D800CC',
+				'#E40058',
+				'#F83800',
+				'#E45C10',
+				'#AC7C00',
+				'#00B800',
+				'#00A800',
+				'#00A844',
+				'#008888',
+				'#000000',
+				'#000000',
+				'#000000',
+				'#F8F8F8',
+				'#3CBCFC',
+				'#6888FC',
+				'#9878F8',
+				'#F878F8',
+				'#F85898',
+				'#F87858',
+				'#FCA044',
+				'#F8B800',
+				'#B8F818',
+				'#58D854',
+				'#58F898',
+				'#00E8D8',
+				'#787878',
+				'#000000',
+				'#000000',
+				'#FCFCFC',
+				'#A4E4FC',
+				'#B8B8F8',
+				'#D8B8F8',
+				'#F8B8F8',
+				'#F8A4C0',
+				'#F0D0B0',
+				'#FCE0A8',
+				'#F8D878',
+				'#D8F878',
+				'#B8F8B8',
+				'#B8F8D8',
+				'#00FCFC',
+				'#F8D8F8',
+				'#000000',
+				'#000000'
+			]);
+			break;
 		case undefined:
 			this.add([ 
 				'#000000', // black
@@ -88,8 +158,19 @@ Palette.prototype.print = function() {
 
 /**
  * Print palette to screen
+ *
+ * @param { int } _cols (Optional) The number of columns
+ * @param { int } _size (Optional) The size of the swatch in pixels
  */
-Palette.prototype.show = function() {
+Palette.prototype.show = function( _cols, _size ) {
+	//------------------------------------------------------------
+	//  Set some defaults
+	//------------------------------------------------------------
+	_size = ( _size == undefined ) ? 20 : _size;
+	_cols = ( _cols == undefined ) ? this.palette.length : parseInt( _cols );
+	//------------------------------------------------------------
+	//  Hide any previous palette
+	//------------------------------------------------------------
 	this.hide();
 	//------------------------------------------------------------
 	//  Build the palette wrapper
@@ -97,7 +178,7 @@ Palette.prototype.show = function() {
 	var palette = document.createElement('div');
 	palette.setAttribute( 'id', 'palette-sample' );
 	palette.style.position = 'absolute';
-	palette.style.right = '0';
+	palette.style.left = '0';
 	palette.style.top = '0';
 	document.body.appendChild( palette );
 	//------------------------------------------------------------
@@ -107,10 +188,13 @@ Palette.prototype.show = function() {
 		var color = '#'+ this.palette[i].hex();
 		var swatch = document.createElement('div');
 		swatch.style.backgroundColor = color;
-		swatch.style.height = '20px';
-		swatch.style.width = '20px';
+		swatch.style.height = _size+'px';
+		swatch.style.width = _size+'px';
 		swatch.style.float = 'left';
 		palette.appendChild( swatch );
+		if ( i%_cols == _cols-1 ) {
+			palette.appendChild( document.createElement('br') );
+		}
 	}
 }
 
@@ -130,5 +214,24 @@ Palette.prototype.hide = function() {
  * @param { string } _type The type of sort: [list types here]
  */
 Palette.prototype.sort = function( _type ) {
-	
+	switch ( _type ) {
+		case 'value':
+			this.sortValue();
+			break;
+	}
+}
+
+/**
+ * Sort your palette by value
+ */
+Palette.prototype.sortValue = function() {
+	var sorted = new Sorted();
+	var toCheck = [];
+	for ( var i=0; i<this.palette.length; i++ ) {
+		toCheck[i] = { value: this.palette[i].value(), color: this.palette[i] };
+	}
+	toCheck = sorted.numSort( toCheck, 'value' );
+	for ( var i=0; i<toCheck.length; i++ ) {
+		this.palette[i] = toCheck[i]['color'];
+	}
 }
