@@ -247,7 +247,7 @@ Culuh.prototype.bInt = function() {
 }
 
 /**
- * Returns blue integer value 0-255
+ * Returns integer value 0-765
  *
  * @return { int } RGB color values added together
  */
