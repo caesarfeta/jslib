@@ -82,6 +82,8 @@ String.prototype.occurs = function( _search, _overlap ) {
  * @return {Array} : An array of integers.
  */
 String.prototype.positions = function( _search, _overlap, _ignoreXML, _onlyWords ) {
+	console.log( '----------' );
+	console.log( _search );
 	var string = this;
 	//------------------------------------------------------------
 	//  Make sure _search is a string
@@ -117,7 +119,9 @@ String.prototype.positions = function( _search, _overlap, _ignoreXML, _onlyWords
 			//  Check to see if search string is an isolated word
 			//------------------------------------------------------------
 			if ( _onlyWords == true ) {
-				if ( string[pos-1] != ' ' && string[pos+_search.length] != ' ' ) {
+				console.log( string.substr((pos-1),(pos+_search.length+1)) );
+				console.log( string.substr((pos-1),(pos+_search.length+1)).isAlphaNum() );
+				if ( string.substr((pos-1),(pos+_search.length+1)).isAlphaNum() == true ) {
 					ok = false;
 				}
 			}
@@ -200,6 +204,18 @@ String.prototype.report = function() {
  */
 String.prototype.lines = function() {
 	return this.split("\n");
+}
+
+/*
+ * Check to see if string is composed of only alphanumeric characters
+ *
+ * @return { boolean }
+ */
+String.prototype.isAlphaNum = function() {
+	if ( /[^a-zA-Z0-9]/.test( this ) ) {
+		return false;
+	}
+	return true;
 }
 
 /*
