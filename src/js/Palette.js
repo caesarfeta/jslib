@@ -215,20 +215,72 @@ Palette.prototype.hide = function() {
  */
 Palette.prototype.sort = function( _type ) {
 	switch ( _type ) {
+		//------------------------------------------------------------
+		//  Value
+		//------------------------------------------------------------
 		case 'value':
-			this.sortValue();
+			this.sortNum( function( _color ) {
+				return _color.v;
+			});
+			break;
+		//------------------------------------------------------------
+		//  Hue
+		//------------------------------------------------------------
+		case 'hue':
+			this.sortNum( function( _color ) {
+				return _color.h
+			});
+			break;
+		//------------------------------------------------------------
+		//  Saturation
+		//------------------------------------------------------------
+		case 'saturation':
+			this.sortNum( function( _color ) {
+				return _color.s
+			});
+			break;
+		//------------------------------------------------------------
+		//  Red
+		//------------------------------------------------------------
+		case 'red':
+			this.sortNum( function( _color ) {
+				var sub = (_color.gInt()+_color.bInt())/2;
+				return _color.rInt()-sub;
+			});
+			break;
+		//------------------------------------------------------------
+		//  Green
+		//------------------------------------------------------------
+		case 'green':
+			this.sortNum( function( _color ) {
+				var sub = (_color.rInt()+_color.bInt())/2;
+				return _color.gInt()-sub;
+			});
+			break;
+		//------------------------------------------------------------
+		//  Blue
+		//------------------------------------------------------------
+		case 'blue':
+			this.sortNum( function( _color ) {
+				var sub = (_color.rInt()+_color.gInt())/2;
+				return _color.bInt()-sub;
+			});
 			break;
 	}
 }
 
 /**
- * Sort your palette by value
+ * Sort your palette by some numerical value.
+ *
+ * @param { function } _func A function which returns an int.
+ *  	This function will be passed a { Culuh } object as a parameter
  */
-Palette.prototype.sortValue = function() {
+Palette.prototype.sortNum = function( _func ) {
+	console.log( _func );
 	var sorted = new Sorted();
 	var toCheck = [];
 	for ( var i=0; i<this.palette.length; i++ ) {
-		toCheck[i] = { value: this.palette[i].value(), color: this.palette[i] };
+		toCheck[i] = { value: _func( this.palette[i] ), color: this.palette[i] };
 	}
 	toCheck = sorted.numSort( toCheck, 'value' );
 	for ( var i=0; i<toCheck.length; i++ ) {
