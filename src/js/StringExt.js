@@ -6,6 +6,13 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Remove extra spaces
+ */
+String.prototype.oneSpace = function() {
+	return this.replace(/\s{2,}/g, ' ');
+}
+
+/**
  * Alpha-numeric and spaces only
  */
 String.prototype.alphaSpaceOnly = function() {
