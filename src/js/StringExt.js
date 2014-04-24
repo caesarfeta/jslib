@@ -6,6 +6,13 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Strip html tags
+ */
+String.prototype.stripTags = function() {
+	return this.replace(/<\/?[^>]+(>|$)/g, '' );
+}
+
+/**
  * Remove extra spaces
  */
 String.prototype.oneSpace = function() {
@@ -17,6 +24,13 @@ String.prototype.oneSpace = function() {
  */
 String.prototype.alphaSpaceOnly = function() {
 	return this.replace(/[^\w\s]/gi, '');
+}
+
+/**
+ * Alpha-numeric characters only
+ */
+String.prototype.alphaOnly = function() {
+	return this.replace(/[^\w]/gi, '');
 }
 
 /**
