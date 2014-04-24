@@ -291,6 +291,19 @@ Culuh.prototype.sat = function( _sat, _out ) {
 }
 
 /**
+ * Return rgba string with specified alpha value
+ *
+ * @param { float } _float A number between 0 and 1
+ * @return { string }
+ */
+Culuh.prototype.toAlpha = function( _float ) {
+	_float = parseFloat( _float );
+	_float = ( _float < 0 ) ? 0 : _float;
+	_float = ( _float > 1 ) ? 1 : _float;
+	return 'rgba('+this.r+','+this.g+','+this.b+','+_float+')';
+}
+
+/**
  * Invert the color
  *
  * @param { boolean: false } _new return new Culuh

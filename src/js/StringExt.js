@@ -82,8 +82,8 @@ String.prototype.occurs = function( _search, _overlap ) {
  * @return {Array} : An array of integers.
  */
 String.prototype.positions = function( _search, _overlap, _ignoreXML, _onlyWords ) {
-	console.log( '----------' );
-	console.log( _search );
+//	console.log( '----------' );
+//	console.log( _search );
 	var string = this;
 	//------------------------------------------------------------
 	//  Make sure _search is a string
@@ -119,8 +119,8 @@ String.prototype.positions = function( _search, _overlap, _ignoreXML, _onlyWords
 			//  Check to see if search string is an isolated word
 			//------------------------------------------------------------
 			if ( _onlyWords == true ) {
-				console.log( string.substr((pos-1),(pos+_search.length+1)) );
-				console.log( string.substr((pos-1),(pos+_search.length+1)).isAlphaNum() );
+//				console.log( string.substr((pos-1),(pos+_search.length+1)) );
+//				console.log( string.substr((pos-1),(pos+_search.length+1)).isAlphaNum() );
 				if ( string.substr((pos-1),(pos+_search.length+1)).isAlphaNum() == true ) {
 					ok = false;
 				}

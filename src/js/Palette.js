@@ -8,7 +8,7 @@
  * @param { string } _name The name of the palette.
  */
 function Palette( _name ) {
-	this.palette = [];
+	this.colors = [];
 	this.load( _name );
 }
 
@@ -131,7 +131,7 @@ Palette.prototype.load = function( _name ) {
  * Reset the palette
  */
 Palette.prototype.reset = function() {
-	this.palette = [];
+	this.colors = [];
 }
 
 /**
@@ -141,7 +141,7 @@ Palette.prototype.reset = function() {
  */
 Palette.prototype.add = function( _colors ) {
 	for ( var i=0; i<_colors.length; i++ ) {
-		this.palette.push( new Culuh( _colors[i] ) );
+		this.colors.push( new Culuh( _colors[i] ) );
 	}
 }
 
@@ -151,8 +151,8 @@ Palette.prototype.add = function( _colors ) {
  * @param { string } _name The name of the palette.
  */
 Palette.prototype.print = function() {
-	for ( var i=0; i<this.palette.length; i++ ) {
-		console.log( this.palette[i].hex() );
+	for ( var i=0; i<this.colors.length; i++ ) {
+		console.log( this.colors[i].hex() );
 	}
 }
 
@@ -167,7 +167,7 @@ Palette.prototype.show = function( _cols, _size ) {
 	//  Set some defaults
 	//------------------------------------------------------------
 	_size = ( _size == undefined ) ? 20 : _size;
-	_cols = ( _cols == undefined ) ? this.palette.length : parseInt( _cols );
+	_cols = ( _cols == undefined ) ? this.colors.length : parseInt( _cols );
 	//------------------------------------------------------------
 	//  Hide any previous palette
 	//------------------------------------------------------------
@@ -276,14 +276,13 @@ Palette.prototype.sort = function( _type ) {
  *  	This function will be passed a { Culuh } object as a parameter
  */
 Palette.prototype.sortNum = function( _func ) {
-	console.log( _func );
 	var sorted = new Sorted();
 	var toCheck = [];
-	for ( var i=0; i<this.palette.length; i++ ) {
-		toCheck[i] = { value: _func( this.palette[i] ), color: this.palette[i] };
+	for ( var i=0; i<this.colors.length; i++ ) {
+		toCheck[i] = { value: _func( this.colors[i] ), color: this.colors[i] };
 	}
 	toCheck = sorted.numSort( toCheck, 'value' );
 	for ( var i=0; i<toCheck.length; i++ ) {
-		this.palette[i] = toCheck[i]['color'];
+		this.colors[i] = toCheck[i]['color'];
 	}
 }
