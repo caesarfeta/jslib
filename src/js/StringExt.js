@@ -6,6 +6,16 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Splice in a string at a specified index
+ *
+ * @param { string } _string
+ * @param { int } _index The position in the string
+ */
+String.prototype.splice = function( _string, _index ) {
+    return ( this.slice( 0, Math.abs( _index ) ) + _string + this.slice( Math.abs( _index )));
+};
+
+/**
  * Strip html tags
  */
 String.prototype.stripTags = function() {
