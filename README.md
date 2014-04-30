@@ -14,8 +14,8 @@ Fills some gaps left by Javascript's native DOM manipulation methods.
 ## jQueryPlus.js
 Custom jQuery methods.
 
-## StringExt.js
-Extends Javascript's native String class with some useful methods.
+## MathExt.js
+Handy math functions.
 
 ## ObjectExt.js
 Mush and manipulate objects.
@@ -28,6 +28,9 @@ Need a shared Javascript object with global scope to hold configuration options?
 
 ## Sorted.js
 Array sorting methods.
+
+## StringExt.js
+Extends Javascript's native String class with some useful methods.
 
 ## Styler.js
 Create CSS rules from within Javascript working at the class/selector level instead of the element level.
