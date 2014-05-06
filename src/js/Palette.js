@@ -128,6 +128,15 @@ Palette.prototype.load = function( _name ) {
 }
 
 /**
+ * Get a color from the palette modulo style.
+ *
+ * @param { int } _int The index of color that you want.
+ */
+Palette.prototype.at = function( _int ) {
+	return this.colors[ _int % this.colors.length ];
+}
+
+/**
  * Reset the palette
  */
 Palette.prototype.reset = function() {
