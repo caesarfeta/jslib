@@ -33,6 +33,20 @@ jQuery.fn.cursorToEnd = function() {
 };
 
 /**
+ *  Remove whitespace
+ *  Copied from
+ *  http://stackoverflow.com/questions/1539367/remove-whitespace-and-line-breaks-between-html-elements-using-jquery
+ */
+jQuery.fn.noSpace = function() {
+	textNodes = this.contents().filter(
+		function() { 
+			return ( this.nodeType == 3 && !/\S/.test( this.nodeValue ) );
+		}
+	).remove();
+	return this;
+}
+
+/**
  *  Get an element's html
  */
 jQuery.fn.myHtml = function() {
