@@ -12,8 +12,19 @@ String.prototype.smoosh = function() {
  * @param { int } _index The position in the string
  */
 String.prototype.splice = function( _string, _index ) {
-    return ( this.slice( 0, Math.abs( _index ) ) + _string + this.slice( Math.abs( _index )));
-};
+	return ( this.slice( 0, Math.abs( _index ) ) + _string + this.slice( Math.abs( _index )));
+}
+
+/**
+ * Remove white-space between HTML elements
+ */
+String.prototype.noSpaceHtml = function() {
+	var r = this.replace(/\n/g, '');
+	r = r.replace(/[\t ]+\</g, '<');
+	r = r.replace(/\>[\t ]+\</g, '><');
+	r = r.replace(/\>[\t ]+$/g, '>');
+	return r;
+}
 
 /**
  * Strip html tags
