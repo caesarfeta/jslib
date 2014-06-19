@@ -9,7 +9,6 @@ test( "Palette -- found", function() {
 		var p = new Palette( 'secondary' );
 	}
 	catch( _err ) {
-		console.dir( _err );
 		check = false;
 	}
 	ok( check == true );
