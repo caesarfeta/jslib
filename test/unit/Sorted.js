@@ -19,7 +19,6 @@ test( "numSort -- int flat", function() {
 test( "numSort -- real flat", function() {
 	var sorted = new Sorted();
 	var test = sorted.numSort( [ 5.4, .67, .032, 55.6, 0, Math.PI, -12, -7.00, -0.78 ] );
-	console.log( test );
 	var check = true;
 	for ( var i=1, ii=test.length; i<ii; i++ ) {
 		if ( test[i] < test[i-1] ) {

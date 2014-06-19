@@ -12,118 +12,111 @@ function Palette( _name ) {
 	this.load( _name );
 }
 
+Palette.prototype.palettes = function( _name ) {
+	var ps = {
+		'default': [
+			'#000000', // black
+			'#FFFFFF'  // white
+		],
+		'grayscale': [ 
+			'#000000', 
+			'#333333', 
+			'#666666', 
+			'#999999', 
+			'#CCCCCC', 
+			'#FFFFFF' 
+		],
+		'primary': [
+			'#FF0000', // red
+			'#00FF00', // green
+			'#0000FF'  // blue
+		],
+		'secondary': [
+			'#00FFFF', // cyan
+			'#FF00FF', // magenta
+			'#FFFF00'  // yellow
+		],
+		'candy': [
+			'#F4DDBE', // coffee milk
+			'#465A95', // sunset purple
+			'#10CCD5', // blue raspberry
+			'#FD8471', // peach skin
+			'#88D499'  // blue grass
+		],
+		'nes': [
+			'#7C7C7C',
+			'#0000FC',
+			'#0000BC',
+			'#4428BC',
+			'#940084',
+			'#A80020',
+			'#A81000',
+			'#881400',
+			'#503000',
+			'#007800',
+			'#006800',
+			'#005800',
+			'#004058',
+			'#000000',
+			'#BCBCBC',
+			'#0078F8',
+			'#0058F8',
+			'#6844FC',
+			'#D800CC',
+			'#E40058',
+			'#F83800',
+			'#E45C10',
+			'#AC7C00',
+			'#00B800',
+			'#00A800',
+			'#00A844',
+			'#008888',
+			'#F8F8F8',
+			'#3CBCFC',
+			'#6888FC',
+			'#9878F8',
+			'#F878F8',
+			'#F85898',
+			'#F87858',
+			'#FCA044',
+			'#F8B800',
+			'#B8F818',
+			'#58D854',
+			'#58F898',
+			'#00E8D8',
+			'#787878',
+			'#FCFCFC',
+			'#A4E4FC',
+			'#B8B8F8',
+			'#D8B8F8',
+			'#F8B8F8',
+			'#F8A4C0',
+			'#F0D0B0',
+			'#FCE0A8',
+			'#F8D878',
+			'#D8F878',
+			'#B8F8B8',
+			'#B8F8D8',
+			'#00FCFC',
+			'#F8D8F8'
+		]
+	};
+	if ( _name == undefined ) {
+		return ps[ 'default' ];
+	}
+	return ps[ _name ];
+}
+
 /**
  * Load a palette
  *
  * @param { string } _name The name of the palette.
  */
 Palette.prototype.load = function( _name ) {
-	switch ( _name ) {
-		case 'grayscale':
-			this.add([ 
-				'#000000', 
-				'#333333', 
-				'#666666', 
-				'#999999', 
-				'#CCCCCC', 
-				'#FFFFFF' 
-			]);
-			break;
-		case 'primary':
-			this.add([ 
-				'#FF0000', // red
-				'#00FF00', // green
-				'#0000FF'  // blue
-			]);
-			break;
-		case 'secondary':
-			this.add([ 
-				'#00FFFF', // cyan
-				'#FF00FF', // magenta
-				'#FFFF00'  // yellow
-			]);
-			break;
-		case 'candy':
-			this.add([
-				'#F4DDBE', // coffee milk
-				'#465A95', // sunset purple
-				'#10CCD5', // blue raspberry
-				'#FD8471', // peach skin
-				'#88D499'  // blue grass
-			]);
-		case 'nes':
-			this.add([
-				'#7C7C7C',
-				'#0000FC',
-				'#0000BC',
-				'#4428BC',
-				'#940084',
-				'#A80020',
-				'#A81000',
-				'#881400',
-				'#503000',
-				'#007800',
-				'#006800',
-				'#005800',
-				'#004058',
-				'#000000',
-				'#000000',
-				'#000000',
-				'#BCBCBC',
-				'#0078F8',
-				'#0058F8',
-				'#6844FC',
-				'#D800CC',
-				'#E40058',
-				'#F83800',
-				'#E45C10',
-				'#AC7C00',
-				'#00B800',
-				'#00A800',
-				'#00A844',
-				'#008888',
-				'#000000',
-				'#000000',
-				'#000000',
-				'#F8F8F8',
-				'#3CBCFC',
-				'#6888FC',
-				'#9878F8',
-				'#F878F8',
-				'#F85898',
-				'#F87858',
-				'#FCA044',
-				'#F8B800',
-				'#B8F818',
-				'#58D854',
-				'#58F898',
-				'#00E8D8',
-				'#787878',
-				'#000000',
-				'#000000',
-				'#FCFCFC',
-				'#A4E4FC',
-				'#B8B8F8',
-				'#D8B8F8',
-				'#F8B8F8',
-				'#F8A4C0',
-				'#F0D0B0',
-				'#FCE0A8',
-				'#F8D878',
-				'#D8F878',
-				'#B8F8B8',
-				'#B8F8D8',
-				'#00FCFC',
-				'#F8D8F8',
-				'#000000',
-				'#000000'
-			]);
-			break;
-		case undefined:
-			this.add([ 
-				'#000000', // black
-				'#FFFFFF'  // white
-			]);
+	var self = this;
+	var palette = self.palettes( _name );
+	if ( palette == undefined ) {
+		throw "Palette -- "+_name+" could not be found";
 	}
 }
 
