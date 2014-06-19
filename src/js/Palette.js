@@ -104,7 +104,10 @@ Palette.prototype.palettes = function( _name ) {
 	if ( _name == undefined ) {
 		return ps[ 'default' ];
 	}
-	return ps[ _name ];
+	if ( _name in ps ) {
+		return ps[ _name ];
+	}
+	return undefined;
 }
 
 /**
@@ -113,11 +116,11 @@ Palette.prototype.palettes = function( _name ) {
  * @param { string } _name The name of the palette.
  */
 Palette.prototype.load = function( _name ) {
-	var self = this;
-	var palette = self.palettes( _name );
-	if ( palette == undefined ) {
+	var colors = this.palettes( _name );
+	if ( colors == undefined ) {
 		throw "Palette -- "+_name+" could not be found";
 	}
+	this.add( colors );
 }
 
 /**
