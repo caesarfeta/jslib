@@ -4,6 +4,7 @@
 module( "ArrayExt" );
 
 test( "multijoin", function() {
+	var ext = new ArrayExt();
 	var array = [ '1', '1', '2', '2' ];
-	ok( array.multijoin( ['+',' '] ) == '1+1 2+2' );
+	ok( ext.multijoin( array, ['+',' '] ) == '1+1 2+2' );
 });
