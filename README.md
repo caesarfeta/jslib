@@ -8,6 +8,9 @@ Builds an auto-resizing, fullscreen, HTML canvas.
 ## Culuh.js
 A class that allows you to manipulate colors and output them as either RGB or HEX values.
 
+## DateConver.js
+Functions for converting dates
+
 ## DomPlus.js
 Fills some gaps left by Javascript's native DOM manipulation methods.
 
