@@ -6,6 +6,15 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Breakup string at spaces respecting double quotes
+ * and save the substrings in an array, 
+ * so it can be interpreted shell style.
+ */
+String.prototype.shellArgs = function() {
+	return this.match( /(".*?"|[^"\s]+)/g );
+}
+
+/**
  * Splice in a string at a specified index
  *
  * @param { string } _string
