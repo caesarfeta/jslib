@@ -8,7 +8,7 @@ String.prototype.smoosh = function() {
 /**
  * Breakup string at spaces respecting double quotes
  * and save the substrings in an array, 
- * so it can be interpreted shell style.
+ * so they can be interpreted shell style.
  */
 String.prototype.shellArgs = function() {
 	return this.match( /(".*?"|[^"\s]+)/g );
