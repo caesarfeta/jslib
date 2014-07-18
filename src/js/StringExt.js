@@ -6,6 +6,13 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Turn a string into what I commonly use as hash/object keys
+ */
+String.prototype.keyMe = function() {
+	return this.toLowerCase().replace(' ','_');
+}
+
+/**
  * Ultra simple templating system
  */
 String.prototype.template = function( _map ) {
