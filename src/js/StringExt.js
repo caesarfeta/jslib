@@ -30,7 +30,11 @@ String.prototype.template = function( _map ) {
  * so they can be interpreted shell style.
  */
 String.prototype.shellArgs = function() {
-	return this.match( /('.*?'|".*?"|[^"\s]+)/g );
+	var matches = this.match( /('.*?'|".*?"|[^"\s]+)/g );
+	for ( var i=0; i<matches.length; i++ ) {
+		matches[i] = matches[i].replace( /^"|"$|^'|'$/g, "")
+	}
+	return matches;
 }
 
 /**
