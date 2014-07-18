@@ -23,7 +23,7 @@ String.prototype.template = function( _map ) {
  * so they can be interpreted shell style.
  */
 String.prototype.shellArgs = function() {
-	return this.match( /(".*?"|[^"\s]+)/g );
+	return this.match( /('.*?'|".*?"|[^"\s]+)/g );
 }
 
 /**
