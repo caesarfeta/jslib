@@ -1,5 +1,15 @@
 /**
- * Extend jQuery
+ * Scroll to the bottom of a page.
+ *
+ * @param { integer } _sec Seconds
+ */
+jQuery.scrollToBottom = function( _sec ) {
+	var body = jQuery( 'body' );
+	body.animate({ scrollTop: body.height() }, _sec*1000 );
+}
+
+/**
+ * Put the cursor at the end of the input box
  */
 jQuery.fn.cursorToEnd = function() {
 	return this.each( function() {
