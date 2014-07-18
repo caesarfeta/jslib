@@ -6,6 +6,18 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Ultra simple templating system
+ */
+String.prototype.template = function( _map ) {
+	return this.replace(/{([^{}]*)}/g,
+		function ( a, b ) {
+			var r = _map[ b.alphaOnly() ];
+			return typeof r === 'string' || typeof r === 'number' ? r : a;
+		}
+	);
+}
+
+/**
  * Breakup string at spaces respecting double quotes
  * and save the substrings in an array, 
  * so they can be interpreted shell style.
