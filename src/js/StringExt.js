@@ -13,6 +13,13 @@ String.prototype.keyMe = function() {
 }
 
 /**
+ * Retrieve the last integer in a string
+ */
+String.prototype.lastInt = function() {
+	return parseInt(this.replace(/.*?(\d+)[^\d]*$/,'$1'));
+}
+
+/**
  * Ultra simple templating system
  */
 String.prototype.template = function( _map ) {
