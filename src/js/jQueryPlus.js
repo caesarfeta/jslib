@@ -1,5 +1,16 @@
 /**
- * Extend jQuery
+ * Scroll to the bottom of a page.
+ *
+ * @param { integer } _sec Seconds
+ */
+jQuery.scrollToBottom = function( _sec ) {
+	var dh =  jQuery(document).height();
+	var wh = jQuery(window).height();
+	jQuery('html,body').animate({ scrollTop:dh-wh }, _sec*1000 );
+}
+
+/**
+ * Put the cursor at the end of the input box
  */
 jQuery.fn.cursorToEnd = function() {
 	return this.each( function() {
@@ -31,6 +42,20 @@ jQuery.fn.cursorToEnd = function() {
 		this.scrollTop = 999999;
 	});
 };
+
+/**
+ *  Remove whitespace
+ *  Copied from
+ *  http://stackoverflow.com/questions/1539367/remove-whitespace-and-line-breaks-between-html-elements-using-jquery
+ */
+jQuery.fn.noSpace = function() {
+	textNodes = this.contents().filter(
+		function() { 
+			return ( this.nodeType == 3 && !/\S/.test( this.nodeValue ) );
+		}
+	).remove();
+	return this;
+}
 
 /**
  *  Get an element's html

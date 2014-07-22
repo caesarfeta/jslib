@@ -38,7 +38,7 @@ ObjectExt.prototype.totalChars = function( _obj, _totalRoll, _depth ) {
 }
 
 /**
- * Count the characters of all values in an object
+ * Count the characters of all keys in an object
  *
  * @param { obj } _obj An Object
  * @return { array } character count, array of character counts by column

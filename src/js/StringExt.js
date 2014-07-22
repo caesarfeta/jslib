@@ -6,14 +6,64 @@ String.prototype.smoosh = function() {
 }
 
 /**
+ * Turn a string into what I commonly use as hash/object keys
+ */
+String.prototype.keyMe = function() {
+	return this.toLowerCase().replace(' ','_');
+}
+
+/**
+ * Retrieve the last integer in a string
+ */
+String.prototype.lastInt = function() {
+	return parseInt(this.replace(/.*?(\d+)[^\d]*$/,'$1'));
+}
+
+/**
+ * Ultra simple templating system
+ */
+String.prototype.template = function( _map ) {
+	return this.replace(/{([^{}]*)}/g,
+		function ( a, b ) {
+			var r = _map[ b.alphaOnly() ];
+			return typeof r === 'string' || typeof r === 'number' ? r : a;
+		}
+	);
+}
+
+/**
+ * Breakup string at spaces respecting double quotes
+ * and save the substrings in an array, 
+ * so they can be interpreted shell style.
+ */
+String.prototype.shellArgs = function() {
+	var matches = this.match( /('.*?'|".*?"|[^"\s]+)/g );
+	for ( var i=0; i<matches.length; i++ ) {
+		matches[i] = matches[i].replace( /^"|"$|^'|'$/g, "")
+	}
+	return matches;
+}
+
+/**
  * Splice in a string at a specified index
  *
  * @param { string } _string
  * @param { int } _index The position in the string
  */
 String.prototype.splice = function( _string, _index ) {
-    return ( this.slice( 0, Math.abs( _index ) ) + _string + this.slice( Math.abs( _index )));
-};
+	return ( this.slice( 0, Math.abs( _index ) ) + _string + this.slice( Math.abs( _index )));
+}
+
+/**
+ * Remove white-space between HTML elements
+ */
+String.prototype.noSpaceHtml = function() {
+	var r = this.replace(/\n/g, '');
+	r = r.replace(/[\t ]+\</g, '<');
+	r = r.replace(/\>[\t ]+\</g, '><');
+	r = r.replace(/\>[\t ]+$/g, '>');
+	return r;
+}
 
 /**
  * Strip html tags

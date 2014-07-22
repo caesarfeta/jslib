@@ -3,6 +3,10 @@
 */
 module( "StringExt" );
 
+test( "shellArgs-0", function() {
+	ok( '1 2 3 "4 5 6" 7 8'.shellArgs().length == 6 );
+});
+
 test( "occurs-0", function() {
 	var string = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, \
 	 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \
