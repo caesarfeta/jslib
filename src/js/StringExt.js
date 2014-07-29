@@ -32,6 +32,20 @@ String.prototype.template = function( _map ) {
 }
 
 /**
+ * Ultra simple templating system
+ */
+String.prototype.escapeHtml = function() {
+	var map = { '&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				'"': '&quot;',
+				"'": '&#39;' };
+	return this.replace( /[&<>]/g, function(c) {
+		return map[c];
+	});
+}
+
+/**
  * Breakup string at spaces respecting double quotes
  * and save the substrings in an array, 
  * so they can be interpreted shell style.
