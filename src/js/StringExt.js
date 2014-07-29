@@ -25,7 +25,11 @@ String.prototype.lastInt = function() {
 String.prototype.template = function( _map ) {
 	return this.replace(/{([^{}]*)}/g,
 		function ( a, b ) {
-			var r = _map[ b.alphaOnly() ];
+			var key = b.alphaOnly();
+			var r = undefined;
+			if ( _map != undefined && key in _map ) {
+				r = _map[ key ];
+			}
 			return typeof r === 'string' || typeof r === 'number' ? r : a;
 		}
 	);
