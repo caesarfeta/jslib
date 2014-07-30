@@ -45,6 +45,24 @@ TimeStamp.prototype.withUtc = function( _milli ) {
 }
 
 /**
+ * Return the time of day
+ *
+ * @return { String } Easily understood time of day
+ */
+TimeStamp.prototype.timeOfDay = function() {
+	var d = new Date();
+	var hh = d.getHours();
+	var min = ('0' + d.getMinutes()).slice(-2);
+	var dd = "AM";
+	if ( hh > 12 ) {
+		hh = hh-12;
+		dd = "PM";
+	}
+	hh = ( hh == 0 ) ? 12 : hh;
+	return hh+":"+min+" "+dd;
+}
+
+/**
  * Return unix time
  *
  * @return { int } unix time
