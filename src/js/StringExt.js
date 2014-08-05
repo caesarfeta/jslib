@@ -50,7 +50,7 @@ String.prototype.escapeHtml = function() {
 }
 
 /**
- * Breakup string at spaces respecting double quotes
+ * Breakup string at spaces respecting quotes
  * and save the substrings in an array, 
  * so they can be interpreted shell style.
  */
