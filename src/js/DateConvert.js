@@ -12,6 +12,9 @@ function DateConvert() {}
 DateConvert.prototype.hijriToGreg = function( _h ) {
 	return Math.round( _h-(_h/33)+622 );
 }
+DateConvert.prototype.toRoman = function( _h ) {
+	return this.hijriToGreg( _h );
+}
 
 /**
  * Convert a Gregorian year to an Hijri year
@@ -21,4 +24,7 @@ DateConvert.prototype.hijriToGreg = function( _h ) {
  */
 DateConvert.prototype.gregToHijri = function( _g ) {
 	return Math.round( _g-622+(_g-622)/32 );
+}
+DateConvert.prototype.toArabic = function( _h ) {
+	return this.gregToHijri( _h );
 }
