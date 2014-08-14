@@ -1,8 +1,10 @@
 ArrayExt = function() {}
+
 /**
  * Join an array with alternating strings
  *
- * @param { array } _strings
+ * @param { Array } _strings
+ * @return { String }
  */
 ArrayExt.prototype.multijoin = function( _array, _strings ) {
 	var output = '';
@@ -14,4 +16,21 @@ ArrayExt.prototype.multijoin = function( _array, _strings ) {
 		output += _array[i]+glue;
 	}
 	return output;
+}
+
+/**
+ * Remove items from one array which match items in another array.
+ *
+ * @param { Array } _array
+ * @param { Array } _remove
+ * @return { Array }
+ */
+ArrayExt.prototype.exile = function( _array, _remove ) {
+	for ( var i=_array.length-1; i>=0; i-- ) {
+		for ( var j=_remove.length-1; j>=0; j-- ) {
+			if ( array[i] === _remove[j] ) {
+				array.splice( i, 1 );
+			}
+		}
+	}
 }
