@@ -26,11 +26,15 @@ ArrayExt.prototype.multijoin = function( _array, _strings ) {
  * @return { Array }
  */
 ArrayExt.prototype.exile = function( _array, _remove ) {
+	if ( ! _array instanceof Array ) {
+		return _array;
+	}
 	for ( var i=_array.length-1; i>=0; i-- ) {
 		for ( var j=_remove.length-1; j>=0; j-- ) {
-			if ( array[i] === _remove[j] ) {
-				array.splice( i, 1 );
+			if ( _array[i] === _remove[j] ) {
+				_array.splice( i, 1 );
 			}
 		}
 	}
+	return _array;
 }
