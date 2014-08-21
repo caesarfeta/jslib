@@ -91,6 +91,23 @@ String.prototype.stripTags = function() {
 }
 
 /**
+ * Turn an XML URN to / delimited path
+ */
+String.prototype.urnToPath = function() {
+	var len = this.length;
+	var s = this;
+	if ( s.substring( 0, 1 ) == '<' ) {
+		s = s.substring( 1, len-1 );
+	}
+	if ( s.substring( len-1, 1 ) == '>' ) {
+		s = s.substring( 0, len-2 );
+	}
+	s = s.replace( ':', '/' );
+	s = s.replace( '/', '.' );
+	return s;
+}
+
+/**
  * Remove extra spaces
  */
 String.prototype.oneSpace = function() {
