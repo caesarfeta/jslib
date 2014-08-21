@@ -102,8 +102,8 @@ String.prototype.urnToPath = function() {
 	if ( s.substring( len-1, 1 ) == '>' ) {
 		s = s.substring( 0, len-2 );
 	}
-	s = s.replace( ':', '/' );
-	s = s.replace( '/', '.' );
+	s = s.replace( /:/g, '/' );
+	s = s.replace( /\./g, '/' );
 	return s;
 }
 
