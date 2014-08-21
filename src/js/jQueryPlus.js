@@ -4,7 +4,7 @@
  * @param { integer } _sec Seconds
  */
 jQuery.scrollToBottom = function( _sec ) {
-	var dh =  jQuery(document).height();
+	var dh = jQuery(document).height();
 	var wh = jQuery(window).height();
 	jQuery('html,body').animate({ scrollTop:dh-wh }, _sec*1000 );
 }
