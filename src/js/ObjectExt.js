@@ -18,6 +18,18 @@ ObjectExt.prototype.mergeAdd = function( _obj1, _obj2 ) {
 }
 
 /**
+ * Checks to see if an object is empty
+ *
+ * @param { obj } obj An Object
+ */
+ObjectExt.prototype.isEmpty = function( obj ) {
+	for( var i in obj ) { 
+		return false; 
+	} 
+	return true;
+}
+
+/**
  * Count the characters of all values in an object
  *
  * @param { obj } _obj An Object
