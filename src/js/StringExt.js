@@ -53,8 +53,13 @@ String.prototype.escapeHtml = function() {
  * Breakup string at spaces respecting quotes
  * and save the substrings in an array, 
  * so they can be interpreted shell style.
+ *
+ * @return { array }
  */
 String.prototype.shellArgs = function() {
+	if  ( this == '' ) {
+		return [];
+	}
 	var matches = this.match( /('.*?'|".*?"|[^"\s]+)/g );
 	for ( var i=0; i<matches.length; i++ ) {
 		matches[i] = matches[i].replace( /^"|"$|^'|'$/g, "")
