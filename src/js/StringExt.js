@@ -96,7 +96,7 @@ String.prototype.stripTags = function() {
 }
 
 /**
- * Turn an XML URN to / delimited path
+ * Turn a CITE URN to / delimited path
  */
 String.prototype.urnToPath = function() {
 	var len = this.length;
@@ -109,6 +109,20 @@ String.prototype.urnToPath = function() {
 	}
 	s = s.replace( /:/g, '/' );
 	s = s.replace( /\./g, '/' );
+	return s;
+}
+
+/**
+ * Turn a delimited path to a CITE URN
+ */
+String.prototype.pathToUrn = function( last_dot ) {
+	var len = this.length;
+	var s = this;
+	s = s.replace( /\//g, ':' );
+	if ( last_dot == true ) {
+		var p = s.lastIndexOf(':');
+		s = s.substring(0,p) + '.' + s.substring(p+1);
+	}
 	return s;
 }
 
