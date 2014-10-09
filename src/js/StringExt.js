@@ -354,6 +354,15 @@ String.prototype.isAlphaNum = function() {
 }
 
 /*
+ * Return a string in preferred
+ *
+ * @return { boolean }
+ */
+String.prototype.file_name = function() {
+	return this.toLowerCase().replace( /[^a-z0-9]/g, '_' );
+}
+
+/*
  * Divide text into an array of individual sentences
  * This is English-centric.  Forgive me.
  *
