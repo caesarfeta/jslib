@@ -303,6 +303,16 @@ String.prototype.params = function() {
 	return out;
 }
 
+
+// Turn underscores to camel case
+// @return { string }
+
+String.prototype.toCamel = function(){
+	return this.replace( /(\_[a-z])/g, function( $1 ){
+		return $1.toUpperCase().replace('_','');
+	});
+}
+
 /*
  * Check for the existence of an upper-case letter
  *
